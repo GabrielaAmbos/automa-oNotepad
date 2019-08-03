@@ -14,6 +14,6 @@ Feature: notepad
   Scenario: imprimir um texto
     Given que eu abro o notepad
     When eu escrevo a frase Me imprima!!!!
-    And seleciono a opção imprimir e clico em Imprimir
-    Then o arquivo vai para a impressão
+    And seleciono a opção imprimir
+    Then eu clico em Imprimir
 

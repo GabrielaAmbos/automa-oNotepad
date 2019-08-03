@@ -1,5 +1,5 @@
 from behave import *
-from features.notepad2 import Notepad
+from features.notepad import Notepad
 
 
 @given('que eu abro o notepad')
@@ -19,7 +19,7 @@ def step_impl(context):
 
 @then('o arquivo é salvo com o nome de {nome}')
 def step_impl(context, nome):
-    context.notepad.renomearArquivoESalvar(str(nome))
+    context.notepad.salvar(str(nome))
 
 
 @when('eu vou no menu e seleciono Hora/Data')
@@ -32,9 +32,11 @@ def step_impl(context, horaAndData):
     context.notepad.getText() == horaAndData
 
 
-@when('seleciono a opção imprimir e clico em Imprimir')
+@when('seleciono a opção imprimir')
 def step_impl(context):
     context.notepad.abrirMenuImprimir()
 
-# @when('o arquivo vai para a impressão')
-# def step_impl(context):
+
+@then('eu clico em Imprimir')
+def step_impl(context):
+    context.notepad.imprimir()
