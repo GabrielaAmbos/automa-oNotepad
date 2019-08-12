@@ -2,48 +2,48 @@ from behave import *
 from features.notepad import Notepad
 
 
-@given('que eu abro o notepad')
+@given('que eu abra o notepad')
 def step_impl(context):
     context.notepad = Notepad()
 
 
-@when('eu escrevo a frase {texto}')
-def step_impl(context, texto):
-    context.notepad.digitarTexto(str(texto))
+@when('eu escrevo uma frase qualquer')
+def step_impl(context):
+    context.notepad.digitarTexto(str('Teste notepad'))
 
 
-@when('eu seleciono a opção salvar')
+@when('seleciono a opção salvar')
 def step_impl(context):
     context.notepad.abrirMenuSalvar()
 
 
-@then('o arquivo é salvo com o nome de {nome}')
-def step_impl(context, nome):
-    context.notepad.digitarNaCaixa(str(nome))
+@then('o arquivo é salvo')
+def step_impl(context):
+    context.notepad.digitarNaCaixa(str('teste.txt'))
     context.notepad.botaoConfirmar()
 
 
-@when('eu vou no menu e seleciono Hora/Data')
+@when('eu seleciono a opção Hora/Data')
 def step_impl(context):
     context.notepad.abrirMenuDataHora()
 
 
-@then('é exibido {horaAndData}')
-def step_impl(context, horaAndData):
-    context.notepad.getText() == horaAndData
+@then('é exibido a hora {atual}')
+def step_impl(context, atual):
+    context.notepad.getText() == atual
 
 
-@when('seleciono a opção imprimir')
+@when('seleciono a opção Imprimir')
 def step_impl(context):
     context.notepad.abrirMenuImprimir()
 
 
-@then('eu clico em Imprimir')
+@then('o arquivo vai para a fila de impressão')
 def step_impl(context):
     context.notepad.botaoConfirmar()
 
 
-@when('eu seleciono a opção abrir')
+@when('eu seleciono a opção Abrir')
 def step_impl(context):
     context.notepad.abrirMenuAbrir()
 
@@ -58,25 +58,17 @@ def step_impl(context):
     context.notepad.botaoConfirmar()
 
 
-@when('seleciono a opção fonte')
+@when('eu seleciono a opção Fonte')
 def step_impl(context):
     context.notepad.abrirMenuFonte()
 
 
-@when('altero o tipo de fonte para {fonte}')
-def step_impl(context, fonte):
-    context.notepad.digitarNaCaixa(fonte)
-    context.notepad.mudarCampo()
-    context.notepad.mudarCampo()
-
-
-@when('o tamanho para {tamanho}')
-def step_impl(context,tamanho):
-    context.notepad.digitarNaCaixa(tamanho)
-
-
-@when('clico em OK')
+@when('altero os valores')
 def step_impl(context):
+    context.notepad.digitarNaCaixa('Arial')
+    context.notepad.mudarCampo()
+    context.notepad.mudarCampo()
+    context.notepad.digitarNaCaixa('14')
     context.notepad.botaoConfirmar()
 
 
@@ -85,17 +77,13 @@ def step_impl(context, texto):
     context.notepad.digitarTexto(texto)
 
 
-@when('seleciono a opção Selecionar tudo')
+@when('seleciono as opções para copiar')
 def step_impl(context):
     context.notepad.abrirMenuSelecionarTudo()
-
-
-@when('seleciono a opção Copiar')
-def step_impl(context):
     context.notepad.abrirMenuCopiar()
 
 
-@then('seleciono a opção Colar')
+@then('a frase é duplicada')
 def step_impl(context):
     context.notepad.abrirMenuColar()
 
